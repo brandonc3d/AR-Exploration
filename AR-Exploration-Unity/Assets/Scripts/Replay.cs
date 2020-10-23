@@ -25,7 +25,7 @@ public class Replay : MonoBehaviour
                 recording = !recording;
                 if (recording)
                 {
-                    ReplayKit.StartRecording(enableMicrophone, enableCamera);
+                    ReplayKit.StartRecording(enableCamera);
                 }
                 else
                 {
