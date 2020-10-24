@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -307,12 +307,12 @@ GameObject:
   - component: {fileID: 386411270}
   - component: {fileID: 386411273}
   m_Layer: 5
-  m_Name: AnimationStartButton
+  m_Name: PlaceRoomLightButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &386411269
 RectTransform:
   m_ObjectHideFlags: 0
@@ -353,9 +353,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 1, g: 0.99880975, b: 0.8160377, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.8773585, g: 0.8773585, b: 0.26072446, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -375,7 +375,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 386411271}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1021229666}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &386411271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,7 +514,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: START
+  m_Text: PLACE ROOM LIGHT
 --- !u!222 &442637676
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -581,7 +592,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PAUSE
+  m_Text: PLACE OBJECT
 --- !u!222 &612636241
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -760,6 +771,7 @@ GameObject:
   - component: {fileID: 1021229663}
   - component: {fileID: 1021229664}
   - component: {fileID: 1021229665}
+  - component: {fileID: 1021229666}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -822,10 +834,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73a025b51106444e18fb408fde19ac53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AutomaticPlacement: 1
+  m_AutomaticPlacement: 0
   m_EnvironmentTextureFilterMode: 2
   m_EnvironmentTextureHDR: 0
-  m_DebugPrefab: {fileID: 0}
+  m_DebugPrefab: {fileID: 437869168165390284, guid: aeddd705d192c441b95418b85767a821,
+    type: 3}
 --- !u!114 &1021229664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,13 +846,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1021229659}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d27c5c33cad1044febe1cb5196ad0cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPlace: {fileID: 437869168165390284, guid: aeddd705d192c441b95418b85767a821,
-    type: 3}
+  objectsToPlace:
+  - {fileID: 5134279387470076688, guid: 79966388ca8134e769e3bcbd1bd02cf9, type: 3}
 --- !u!114 &1021229665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,6 +866,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RaycastPrefab: {fileID: 0}
+--- !u!114 &1021229666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021229659}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208031f8282924def8a72c3901fe9196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  probeToPlace: {fileID: 640379424303342816, guid: 65941bc79731545fc86998aea3e52456,
+    type: 3}
 --- !u!1 &1048518382
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,12 +894,12 @@ GameObject:
   - component: {fileID: 1048518384}
   - component: {fileID: 1048518387}
   m_Layer: 5
-  m_Name: AnimationPauseButton
+  m_Name: PlaceObjectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1048518383
 RectTransform:
   m_ObjectHideFlags: 0
@@ -913,9 +940,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.5061855, g: 0.5776459, b: 0.8584906, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.15477037, g: 0.28853896, b: 0.6981132, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -935,7 +962,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1048518385}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1021229664}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1048518385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1232,7 +1270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1614031865
 RectTransform:
   m_ObjectHideFlags: 0

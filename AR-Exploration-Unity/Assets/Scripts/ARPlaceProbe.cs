@@ -7,11 +7,11 @@ using UnityEngine.XR.ARSubsystems;
 
 [RequireComponent(typeof(ARRaycastManager))]
 
-public class ARPlaceObject : MonoBehaviour
+public class ARPlaceProbe : MonoBehaviour
 {
-    public List<GameObject> objectsToPlace;
+    public GameObject probeToPlace;
 
-    private GameObject placedObject;
+    private GameObject placedProbe;
     private ARRaycastManager _arRaycastManager;
     private Vector2 touchPosition;
 
@@ -41,16 +41,13 @@ public class ARPlaceObject : MonoBehaviour
         if (_arRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
         {
             var hitPose = hits[0].pose;  
-            if (placedObject == null)
+            if (placedProbe == null)
             {
-                int index = objectsToPlace.Count;
-                //rand_index = System.Random(index);
-
-                placedObject = Instantiate(objectsToPlace[0], hitPose.position, hitPose.rotation);
+                placedProbe = Instantiate(probeToPlace, hitPose.position, hitPose.rotation);
             }
             else
             {
-                placedObject.transform.position = hitPose.position;    
+                placedProbe.transform.position = hitPose.position;    
             }
         }
     }
