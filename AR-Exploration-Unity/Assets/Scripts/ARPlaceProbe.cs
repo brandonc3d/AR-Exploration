@@ -47,7 +47,8 @@ public class ARPlaceProbe : MonoBehaviour
             }
             else
             {
-                placedProbe.transform.position = hitPose.position;    
+                placedProbe.transform.position = hitPose.position; 
+                Debug.Log("Placed probe.");
             }
         }
     }

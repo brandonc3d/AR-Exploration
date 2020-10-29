@@ -50,7 +50,8 @@ public class ARPlaceObject : MonoBehaviour
             }
             else
             {
-                placedObject.transform.position = hitPose.position;    
+                placedObject.transform.position = hitPose.position;
+                Debug.Log("Placed object.");
             }
         }
     }
