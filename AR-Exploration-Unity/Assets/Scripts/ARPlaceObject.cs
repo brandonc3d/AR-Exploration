@@ -9,18 +9,22 @@ using UnityEngine.XR.ARSubsystems;
 
 public class ARPlaceObject : MonoBehaviour
 {
-    public List<GameObject> objectsToPlace;
+    public GameObject objectToPlace;
+    public GameObject signToPlace;
+    //public Camera ArCamera;
 
     private GameObject placedObject;
+    private GameObject placedSign;
     private ARRaycastManager _arRaycastManager;
     private Vector2 touchPosition;
 
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
-	private void Awake()
+	void Start()
 	{
         _arRaycastManager = GetComponent<ARRaycastManager>();
 	}
+
     bool TryGetTouchPosition(out Vector2 touchPosition)
     {
         if(Input.touchCount > 0)
@@ -32,6 +36,19 @@ public class ARPlaceObject : MonoBehaviour
         touchPosition = default;
         return false;
     }
+    // wait for 10 seconds. 
+    IEnumerator PausePlacement()
+    {
+        //Print the time of when the function is first called.
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        //yield on a new YieldInstruction that waits for 1 seconds.
+        yield return new WaitForSeconds(1);
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+    }
+
 
 	// Update is called once per frame
 	void Update()
@@ -40,18 +57,33 @@ public class ARPlaceObject : MonoBehaviour
             return;
         if (_arRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
         {
-            var hitPose = hits[0].pose;  
-            if (placedObject == null)
-            {
-                int index = objectsToPlace.Count;
-                //rand_index = System.Random(index);
+            var hitPose = hits[0].pose;
+            var cameraLookAt = GameObject.Find("AR Camera");
 
-                placedObject = Instantiate(objectsToPlace[0], hitPose.position, hitPose.rotation);
+            //StartCoroutine(PausePlacement());
+            //if (placedObject == null)
+            //{
+            //    placedObject = Instantiate(objectToPlace, hitPose.position, hitPose.rotation);
+            //}
+
+            if (placedSign == null || placedObject == null)
+            {
+                placedSign = Instantiate(signToPlace, hitPose.position, hitPose.rotation);
+                placedSign.transform.position = hitPose.position;
+
+                placedObject = Instantiate(objectToPlace, hitPose.position, cameraLookAt.transform.rotation);
+                placedObject.transform.position = hitPose.position;
+                //yield return new WaitForSeconds(1);
             }
             else
             {
-                placedObject.transform.position = hitPose.position;
+                //placedObject = Instantiate(objectToPlace, hitPose.position, cameraLookAt.transform.rotation);
+                //placedObject.transform.position = hitPose.position;
+                //yield StartCoroutine(PausePlacement());
+                //yield waitforseconds(1f);
+                //wait
                 Debug.Log("Placed object.");
+                //yield return StartCoroutine(PausePlacement());
             }
         }
     }
